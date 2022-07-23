@@ -1,7 +1,7 @@
-baseurl: /tufte-jekyll
+baseurl: /personal-site
 title: Tufte-Jekyll
 subtitle: Content-centric blogging
-author: clay harmon
+author: Jason Yoo
 simple_search: http://google.com/search
 description: A Jekyll theme for content-rich sites
 name: tufte
