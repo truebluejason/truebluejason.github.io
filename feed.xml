@@ -1,31 +1,77 @@
----
-layout: null
-nav_exclude: true
----
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ site.title | xml_escape }}</title>
-    <description>{{ site.description | xml_escape }}</description>
-    <link>{{ site.url }}{{ site.baseurl }}/</link>
-    <atom:link href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" rel="self" type="application/rss+xml"/>
-    <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
-    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
-    <generator>Jekyll v{{ jekyll.version }}</generator>
-    {% for post in site.posts limit:10 %}
+    <title>Tufte-Jekyll</title>
+    <description>A Jekyll theme for content-rich sites</description>
+    <link>/</link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 25 Jul 2022 13:18:16 -0400</pubDate>
+    <lastBuildDate>Mon, 25 Jul 2022 13:18:16 -0400</lastBuildDate>
+    <generator>Jekyll v4.2.2</generator>
+    
       <item>
-        <title>{{ post.title | xml_escape }}</title>
-        <description>{{ post.content | xml_escape }}</description>
-        <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
-        <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
-        <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>
-        {% for tag in post.tags %}
-        <category>{{ tag | xml_escape }}</category>
-        {% endfor %}
-        {% for cat in post.categories %}
-        <category>{{ cat | xml_escape }}</category>
-        {% endfor %}
+        <title>Continually Learning Deep Associative Memories</title>
+        <description>&lt;p&gt;Associative memories are models that recall stored patterns given incomplete patterns and are important to many theories of biological intelligence. Can we continually learn deep associative memories via predictive coding? Let’s find out&lt;label for=&quot;3&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;3&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;This blog reviews my work on continually learnable predictive coding associative memories. The full paper is available &lt;a href=&quot;https://arxiv.org/abs/2205.09930&quot;&gt;here&lt;/a&gt;. &lt;/span&gt;!
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
+&lt;p&gt;We begin by reviewing what associative memories can do. Associative recall is a process whereby an associative memory, upon receiving an incomplete or corrupt query, retrieves the associated value from memory. Memory update is a process whereby an associative memory adjusts its parameters such that the new pattern can be recalled at a later date. These two operations allow associative memories to function as noise tolerant dictionary data structure.&lt;/p&gt;
+
+&lt;p&gt;Humans and computers make extensive use of associative recall. Have you ever heard a familiar tune at a cafe and played the subsequent tunes inside your head? Or tried to remember your oldest memory from childhood? If so, you have engaged in associative recall. Similarly, a computer’s random-access memory (RAM) accepts address bits as inputs and retrieves the corresponding value bits stored at that address. However, there is a difference between the kind of associative recall carried out by your brain and your computer. RAM’s associative recall is brittle to noise – if even one of the address bits is corrupted, RAM will error or return completely different value bits. On the other hand, human associative recall is robust to noise. Even if a non-negligible percentage of neurons responsible for posing the query to your associative memory wrongfully decide not to fire, your brain, most likely, will still be able to recall the associated value of interest.&lt;/p&gt;
+
+&lt;p&gt;Associative memories in machine learning are designed to support noise-tolerant recall and have been used to solve a wide range of problems from sequence processing&lt;label for=&quot;3&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;3&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Graves, Alex, Greg Wayne, and Ivo Danihelka. “Neural turing machines.” &lt;em&gt;arXiv preprint arXiv:1410.5401&lt;/em&gt; (2014). &lt;/span&gt; to pattern detection&lt;label for=&quot;3&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;3&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Widrich, Michael, et al. “Modern hopfield networks and attention for immune repertoire classification.” &lt;em&gt;Advances in Neural Information Processing Systems&lt;/em&gt; 33 (2020): 18832-18845. &lt;/span&gt;. In addition, their study has allowed us to build models that replicate aspects of biological intelligence&lt;label for=&quot;3&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;3&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Kanerva, Pentti. &lt;em&gt;Sparse distributed memory&lt;/em&gt;. MIT press, 1988. &lt;/span&gt; and provided novel perspectives on seemingly unrelated machine learning toolsets like dot-product attention&lt;label for=&quot;3&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;3&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Ramsauer, Hubert, et al. “Hopfield networks is all you need.” &lt;em&gt;arXiv preprint arXiv:2008.02217&lt;/em&gt; (2020). &lt;/span&gt; and transformers&lt;label for=&quot;3&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;3&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Bricken, Trenton, and Cengiz Pehlevan. “Attention approximates sparse distributed memory.” &lt;em&gt;Advances in Neural Information Processing Systems&lt;/em&gt; 34 (2021): 15301-15315. &lt;/span&gt;. A particularly interesting application of associative memories has been pairing them with neural controllers&lt;label for=&quot;3&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;3&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Schlag, Imanol, Tsendsuren Munkhdalai, and Jürgen Schmidhuber. “Learning associative inference using fast weight memory.” &lt;em&gt;arXiv preprint arXiv:2011.07831&lt;/em&gt; (2020). &lt;/span&gt; that learn to store and recall hidden layer activations to better perform downstream tasks. Intuitively, this allows a neural controller to better integrate information from the distant past since remembering is reduced to posing a (potentially corrupted) query to its associative memory. This is not unlike what humans do and such approaches have set state-of-the-art scores on several sequence processing tasks.&lt;/p&gt;
+
+&lt;h3 id=&quot;project-motivation&quot;&gt;Project Motivation&lt;/h3&gt;
+&lt;p&gt;A key requirement of associative memories that can be used in such settings is the ability to perform rapid and incremental memory update. It is well known that many offline learned machine learning models suffer from catastrophic forgetting, a phenomenon where old information is significantly overwritten by new information, when they are continually learned without care. Many modern associative memories (ex. generative predictive coding networks&lt;label for=&quot;3&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;3&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Salvatori, Tommaso, et al. “Associative memories via predictive coding.” &lt;em&gt;Advances in Neural Information Processing Systems&lt;/em&gt; 34 (2021): 3874-3886. &lt;/span&gt;) lack explicit mechanisms that mitigate catastrophic forgetting despite their impressive recall capabilities.&lt;/p&gt;
+
+&lt;p&gt;This was what motivated me to design BayesPCN, a novel neural network associative memory that can be stacked arbitrarily deep. BayesPCN, without any meta-learning, can perform one-shot updates of its model parameters to store new observations and is the first parametric associative memory to continually learn hundreds of high-dimensional observations while maintaining recall performance comparable to the state-of-the-art offline learned associative memories. In addition, BayesPCN supports an explicit forgetting mechanism that gradually erases old information to free its memory. Grounded in the theory of predictive coding&lt;label for=&quot;3&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;3&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Millidge, Beren, Anil Seth, and Christopher L. Buckley. “Predictive coding: a theoretical and experimental review.” &lt;em&gt;arXiv preprint arXiv:2107.12979&lt;/em&gt; (2021). &lt;/span&gt; from neuroscience, BayesPCN’s inference and learning dynamics are more biologically plausible than the commonly used backpropagation algorithm as all model computations only rely on local information.&lt;/p&gt;
+
+&lt;h3 id=&quot;bayespcn-demo&quot;&gt;BayesPCN Demo&lt;/h3&gt;
+&lt;p&gt;We will leave the technical details to the paper and instead look at what BayesPCN can do. We first demonstrate BayesPCN’s ability to one-shot update its model parameters to store new datapoints and correctly recall stored datapoints from severely corrupted memory queries. The following image shows BayesPCN’s recall result of a 12,228 dimensional Tiny ImageNet image.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&quot;/assets/img/dog.png&quot; /&gt;&lt;figcaption class=&quot;maincolumn-figure&quot;&gt;BayesPCN’s recall result before and after the one-shot write of the top left image into memory. The first row contains example memory queries, the second row contains BayesPCN’s recall outputs before write, and the third row contains BayesPCN’s recall outputs immediately after write.&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;We observe that BayesPCN can recover the original image given its variant corrupted with white noise, random pixel blackout, and structured pixel blackout of varying intensities once the image is stored into memory. We now demonstrate BayesPCN’s ability to continue faithfully recalling datapoints as additional datapoints are sequentially stored into memory.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&quot;/assets/gif/first-new.gif&quot; /&gt;&lt;figcaption class=&quot;maincolumn-figure&quot;&gt;A BayesPCN sequentially storing the training images and performing associative recall on the corrupted query images. BayesPCN can view a datapoint just once and encode the information needed to perform associative recall into its neural network synaptic weights. Crucially, this encoding process does not significantly interfere with the previous datapoint encodings, allowing BayesPCN’s to faithfully recall past observations.&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;figure&gt;&lt;img src=&quot;/assets/gif/index.gif&quot; /&gt;&lt;figcaption class=&quot;maincolumn-figure&quot;&gt;A BayesPCN’s recall progression of the top left image as more and more images are successively stored into memory. The top row depicts the query images given to the BayesPCN as inputs and the bottom row depicts the BayesPCN’s recall output for the query image above. The top right caption, “# of subsequent writes”, denotes the number of new Tiny ImageNet images that have been sequentially stored into memory since the storing of the flower image.&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;We observe that BayesPCN can recover the original image given its severely corrupted versions after hundreds of additional images are incrementally written into memory. This kind of recall ability under the presence of noise that slowly deteriorates over hundreds of additional sequential memory writes has never been observed before.&lt;/p&gt;
+
+&lt;p&gt;We also investigate whether BayesPCN can generalize – does BayesPCN get better at reconstructing unseen images from the same data distribution the more datapoint it observes? The GIF below, which details the progression of BayesPCN’s “recall” applied to a particular Tiny ImageNet image that has never been written into memory, suggests that the answer is yes.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&quot;/assets/gif/unseen.gif&quot; /&gt;&lt;figcaption class=&quot;maincolumn-figure&quot;&gt;BayesPCN’s recall result for an image not stored in memory. The top row depicts the query images and the bottom row depicts BayesPCN’s recall output. The top right caption, “# of written datapoints”, denotes the total count of Tiny ImageNet images that have been stored into memory.&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;While the reconstruction quality is not good, we can clearly see it improving as more images are written into the model. This, along with a similar related work&lt;label for=&quot;3&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;3&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Ororbia, Alexander, et al. “Lifelong neural predictive coding: Learning cumulatively online without forgetting.” &lt;em&gt;arXiv preprint arXiv:1905.10696&lt;/em&gt; (2019). &lt;/span&gt;, suggests that BayesPCN may be able to do more than associative recall.&lt;/p&gt;
+
+&lt;p&gt;Lastly, we visualize the effect of intentional forgetting on BayesPCN’s recall. BayesPCN can intentionally and gradually forget old datapoints to free its memory in order to better store new datapoints. This forgetting mechanism, once applied an infinite number of times, reverts BayesPCN’s parameters to its original state before storing any datapoint. The following media explicitly visualizes that fact.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&quot;/assets/img/forget.png&quot; /&gt;&lt;figcaption class=&quot;maincolumn-figure&quot;&gt;BayesPCN’s recall result when no datapoint has been stored to the model. The top row depicts the query images and the bottom row depicts BayesPCN’s recall output. Grey is the color that corresponds to the pixel value of zero.&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;figure&gt;&lt;img src=&quot;/assets/gif/forget.gif&quot; /&gt;&lt;figcaption class=&quot;maincolumn-figure&quot;&gt;BayesPCN’s recall result after storing the top left image into memory and applying the ‘forget’ operation to the model multiple times. The top row depicts the query images and the bottom row depicts BayesPCN’s recall output. The top right caption, “# of ‘forget’ operations”, denotes the number of ‘forget’ operations applied to the model since the storing of the flower image.&lt;/figcaption&gt;&lt;/figure&gt;
+
+&lt;p&gt;The recall outputs rapidly resemble the empty memory’s output as more forget operations are applied. The auto-associative recall results of the four left columns become forgotten faster than the hetero-associative recall results of the remaining columns because the former do not have fixed pixel values that ground the recall result to the query images.&lt;/p&gt;
+
+&lt;h3 id=&quot;discussion&quot;&gt;Discussion&lt;/h3&gt;
+&lt;p&gt;Having demonstrated some results, we briefly explain the intuition behind BayesPCN’s associative recall and memory update. BayesPCN recall, given a query vector, iteratively alternates between finding the hidden layer activations that most likely generated the query vector and finding the query vector that is most likely to be generated by the aforementioned hidden layer activations. BayesPCN learning, given a data vector to store, first finds the hidden layer activations that most likely generated the data vector and updates the neural network parameters via locally conjugate Bayesian update such that the model is more likely to generate the data vector / hidden layer activations pair in the future. The key characteristic of BayesPCN that mitigates catastrophic forgetting is its maintenance of a probabilistic belief over its model parameters unlike most other associative memories.&lt;/p&gt;
+
+&lt;p&gt;There are a number of fascinating future research directions for BayesPCN. The first is investigating how to continually store even more datapoints into BayesPCN (thousands and more) without suffering from recall performance decline. Currently, BayesPCN’s recall abruptly deteriorates for all datapoints once “too much” data is stored into memory, where “too much” depends on model hyperparameters but typically ranges from hundreds to early thousands. While forgetting empirically alleviates this issue, further investigation into this behavior would be insightful. The second is applying BayesPCN to tasks that can benefit from robust associative recall, for example sequence processing and continual learning tasks. Lastly, extending BayesPCN to support sequence memorization would be of great interest. If you want to learn more, feel free to check out the full paper&lt;label for=&quot;3&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;3&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Yoo, Jason, and Frank Wood. “BayesPCN: A Continually Learnable Predictive Coding Associative Memory.” &lt;em&gt;arXiv preprint arXiv:2205.09930&lt;/em&gt; (2022). &lt;/span&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 23 Jul 2022 00:00:00 -0400</pubDate>
+        <link>/articles/22/bayespcn</link>
+        <guid isPermaLink="true">/articles/22/bayespcn</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>css</category>
+        
       </item>
-    {% endfor %}
+    
   </channel>
 </rss>
